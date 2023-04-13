@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&family=Lato:wght@300;400&display=swap");
+@import url("https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css");
+
+$color: #3b3b3b;
+/* Color Setting Normal */
+html {
+  /* Default Color */
+  --color: #3b3b3b;
+  --color--opacity-7: rgba(59, 59, 59, 0.7);
+  --color--opacity-5: rgba(59, 59, 59, 0.5);
+  --color--opacity-3: rgba(59, 59, 59, 0.3);
+  --color--opacity-2: rgba(59, 59, 59, 0.2);
+  --color--opacity-1: rgba(59, 59, 59, 0.1);
+
+  /* Background Color */
+  --color-bg: #fff;
+  --color-bg-level-2: #f8f8f8;
+  --color-bg-level-3: #e9e9e9;
+  --color-bg-opacity-7: rgba(255, 255, 255, 0.7);
+  --color-bg-opacity-5: rgba(255, 255, 255, 0.5);
+  --color-bg-opacity-3: rgba(255, 255, 255, 0.3);
+  --color-bg-opacity-1: rgba(255, 255, 255, 0.1);
+
+  /* Theme Color */
+  --color-theme: rgba(192, 204, 226, 1);
+  --color-theme-opacity-7: rgba(192, 204, 226, 0.7);
+  --color-theme-opacity-5: rgba(192, 204, 226, 0.5);
+  --color-theme-opacity-3: rgba(192, 204, 226, 0.3);
+  --color-theme-opacity-2: rgba(192, 204, 226, 0.2);
+  --color-theme-opacity-1: rgba(192, 204, 226, 0.1);
+
+  /* Theme Sub Color */
+  --color-theme-sub: rgba(94, 196, 149, 1);
+  --color-theme-sub-active: rgba(58, 176, 112, 1);
+
+  /* border Color */
+  --color-border: #3b3b3b;
+  --color-border--opacity-7: rgba(59, 59, 59, 0.7);
+  --color-border--opacity-5: rgba(59, 59, 59, 0.5);
+  --color-border--opacity-3: rgba(59, 59, 59, 0.3);
+  --color-border--opacity-2: rgba(59, 59, 59, 0.2);
+  --color-border--opacity-1: rgba(59, 59, 59, 0.1);
+
+  /* Slidebar Color */
+  // --color-slidebar: #f8f8f6;
+  --color-slidebar: #99a8cd;
+
+  /* Scrollbar Color */
+  --color-scrollbar-bg: rgba(0, 0, 0, 0.1);
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin box-sizing() {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Default */
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+  // color: var(--color);
+  color: $color;
+  font: {
+    weight: 300;
+    family: "Lato", "Noto Sans KR", sans-serif;
+  }
+  @include box-sizing;
+}
+* {
+  @include box-sizing;
+}
+body {
+  font-size: 12px;
+}
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0px;
+  list-style: none;
+}
+
+dl,
+dt,
+dd {
+  margin: 0;
+  padding: 0px;
+}
+
+i,
+em {
+  font-style: normal;
+}
+
+strong,
+b,
+dt {
+  font-weight: 800;
+}
+
+/* Button */
+button {
+  padding: 0;
+  cursor: pointer;
+}
+
+/* input */
+input,
+button {
+  vertical-align: middle;
+}
+
+input:focus,
+select:focus,
+option:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+  background-color: var(--color-theme-opacity-1);
+}
+
+input[type="text"] {
+  display: block;
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--color--opacity-1);
+  @include border-radius(7px);
+}
+
+/* Icon */
+.mdi {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  border: 0 solid transparent;
+  background-color: var(--color-scrollbar-bg);
+  @include border-radius(4px);
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-track:not(body) {
+  @include border-radius(4px);
+}
+
+/* Layout */
+#app {
+  display: flex;
+  overflow: hidden;
+  overflow-y: auto;
+  position: relative;
+  min: {
+    width: 800px;
+    height: 500px;
+  }
+  height: 100%;
+  padding: 50px;
+  background-color: var(--color-theme-sub);
+  background-color: #f5f6fa;
+  align-items: center;
+  justify-content: center;
+}
+
+#container {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-theme);
+  background: linear-gradient(to right, var(--color-theme) 50%, var(--color-bg-level-3) 50%);
+  box-shadow: 0 0 10px var(--color--opacity-3);
+  @include border-radius(25px);
+  h2 {
+    margin: 0 0 20px;
+    padding-bottom: 15px;
+    border-bottom: double var(--color--opacity-1);
+    text-align: center;
+  }
+}
+
+/* Common */
+[class*="type--number"] {
+  strong {
+    font-size: 30px;
+    vertical-align: top;
+    & + span {
+      display: inline-block;
+      margin: {
+        top: 8px;
+        left: 3px;
+      }
+    }
+  }
+}
