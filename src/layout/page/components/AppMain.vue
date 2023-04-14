@@ -43,6 +43,22 @@ main {
     -moz-border-radius: 25px;
     border-radius: 25px;
   }
+  h2 {
+    margin: 0 0 20px;
+    padding-bottom: 15px;
+    border-bottom: double var(--color--opacity-1);
+    text-align: center;
+  }
+}
+</style>
+<style lang="scss">
+main {
+  h2 {
+    margin: 0 0 20px;
+    padding-bottom: 15px;
+    border-bottom: double var(--color--opacity-1);
+    text-align: center;
+  }
 }
 </style>
 

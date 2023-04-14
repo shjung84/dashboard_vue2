@@ -2,11 +2,15 @@
 h3 {
   text-align: right;
   font-size: 10px;
+  color: $color-txt;
 }
 .my-task {
   &__list {
     margin-top: 5px;
     border-top: 1px solid var(--color-border--opacity-1);
+    border: 1px solid #000;
+    @include border-radius(25px);
+
     li {
       position: relative;
       padding: 10px;

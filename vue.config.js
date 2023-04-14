@@ -7,14 +7,13 @@ module.exports = {
   // publicPath: "/dashboard_vue2/",
   publicPath: process.env.NODE_ENV === "production" ? "/dashboard_vue2/" : "/",
   outputDir: "docs",
-  // css: {
-  //   loaderOptions: {
-  //     sass: {
-  //       data: `
-  //               @import "@/assets/css/layout.scss";
-  //               @import "@/assets/css/style.scss";
-  //           `,
-  //     },
-  //   },
-  // },
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: `
+          @import "@/assets/css/variables.scss";
+        `,
+      },
+    },
+  },
 };

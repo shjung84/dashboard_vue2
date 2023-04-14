@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkdashboard_vue2"]=self["webpackChunkdashboard_vue2"]||[]).push([[817],{817:function(t,e,n){n.r(e),n.d(e,{default:function(){return i}});var s=function(){var t=this,e=t._self._c;return e("div",{staticClass:"wrap"},[e("h2",[t._v(t._s(t.title))])])},r=[],u={name:"Members",props:{title:{type:String,default:""}},components:{},data(){return{}},methods:{}},a=u,l=n(1001),d=(0,l.Z)(a,s,r,!1,null,null,null),i=d.exports}}]);
+//# sourceMappingURL=817.5968186c.js.map
