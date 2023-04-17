@@ -14,9 +14,7 @@
     height: 100%;
     .sec {
       padding: 10px;
-      -webkit-border-radius: 15px;
-      -moz-border-radius: 15px;
-      border-radius: 15px;
+      @include border-radius(15px);
     }
   }
   &__top {
@@ -29,11 +27,9 @@
       height: 33px;
       justify-content: center;
       align-items: center;
-      background-color: #fff;
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      border-radius: 50%;
-      color: var(--color--opacity-5);
+      background-color: $color-bg;
+      color: $color-txt-opacity-5;
+      @include border-radius(50%);
     }
   }
   &__weather {
@@ -42,13 +38,11 @@
     min-height: 148px;
     margin-top: 15px;
     padding: 17px 20px;
-    background-color: var(--color-theme-sub);
-    color: var(--color-bg);
+    background-color: $color-theme-sub;
+    color: $color-bg;
     font-size: 11px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
     letter-spacing: 1px;
+    @include border-radius(15px);
 
     &::before {
       content: "";
@@ -58,11 +52,9 @@
       width: 120px;
       height: 120px;
       margin: -75px 0 0 -75px;
-      border: 20px solid var(--color-bg-opacity-1);
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      border-radius: 50%;
-      box-sizing: border-box;
+      border: 20px solid $color-bg-opacity-1;
+      @include border-radius(50%);
+      @include box-sizing;
     }
 
     a {
@@ -70,7 +62,7 @@
       top: 17px;
       right: 15px;
       z-index: 2;
-      color: #fff;
+      color: $color-bg;
     }
     dl {
       dt {
@@ -96,17 +88,15 @@
                 left: 50%;
                 width: 6px;
                 height: 6px;
-                background-color: #fff;
-                -webkit-border-radius: 50%;
-                -moz-border-radius: 50%;
-                border-radius: 50%;
+                background-color: $color-bg;
+                @include border-radius(50%);
               }
             }
           }
         }
         &.type--weather {
           padding-top: 8px;
-          border-top: 1px solid var(--color-bg-opacity-5);
+          border-top: 1px solid $color-bg-opacity-5;
           .time-list {
             display: flex;
             flex-wrap: nowrap;
@@ -131,12 +121,6 @@
                 content: "18";
               }
             }
-            em {
-              display: block;
-              text-align: center;
-              font-size: 9px;
-              letter-spacing: 1px;
-            }
           }
         }
       }
@@ -146,10 +130,8 @@
         position: absolute;
         width: 90px;
         height: 90px;
-        background-color: var(--color-bg-opacity-1);
-        -webkit-border-radius: 20px;
-        -moz-border-radius: 20px;
-        border-radius: 20px;
+        background-color: $color-bg-opacity-1;
+        @include border-radius(20px);
       }
       &::before {
         bottom: 80%;

@@ -1,35 +1,40 @@
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.wrap {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  overflow-y: auto;
+  height: 100%;
+  margin-right: -10px;
+  padding-right: 10px;
+}
+</style>
 
 <template lang="pug">
 .wrap
   h2 {{ title }}
-  div
+  div.wrap-inner
     PokemonSearch(
       :apiUrl="apiUrl"
-      @setPokemonUrl="setPokemonUrl"
+      @pokeIdSearch="pokeIdSearch"
     )
     PokemonList(
       :imageUrl="imageUrl"
       :apiUrl="apiUrl"
-      @setPokemonUrl="setPokemonUrl"
+      @pokeViewDetail="pokeViewDetail"
       )
-    pokemonDetail(
-      v-if="showDetail"
-      :pokemonUrl="pokemonUrl"
-      :imageUrl="imageUrl"
-      @closeDetail="closeDetail"
-    )
-  //- div
-  //-   ul
-  //-     li(v-for="user in users") {{ user }}
-
+  pokemonDetail(
+    v-if="showDetail"
+    :pokemonUrl="pokemonUrl"
+    :imageUrl="imageUrl"
+    @closeDetail="closeDetail"
+  )
 </template>
 
 <script>
-// import axios from "axios";
-import PokemonSearch from "./pokemonSearch.vue";
-import PokemonList from "./pokemonList.vue";
-import pokemonDetail from "./pokemonDetail.vue";
+import PokemonSearch from "./PokemonSet/pokemonSearch.vue";
+import PokemonList from "./PokemonSet/pokemonList.vue";
+import pokemonDetail from "./PokemonSet/pokemonDetail.vue";
 
 export default {
   name: "Members",
@@ -47,7 +52,7 @@ export default {
   data: () => {
     return {
       imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
-      apiUrl: "https://pokeapi.co/api/v2/pokemon",
+      apiUrl: "https://pokeapi.co/api/v2/pokemon/",
       pokemonUrl: "",
       showDetail: false,
       // users: [],
@@ -55,10 +60,15 @@ export default {
   },
 
   methods: {
-    setPokemonUrl(url) {
+    pokeIdSearch(url) {
       this.pokemonUrl = url;
       this.showDetail = true;
-      console.log(this.pokemonUrl);
+      console.log(`this.pokemonUrl : ${this.pokemonUrl}`);
+    },
+    pokeViewDetail(url) {
+      this.pokemonUrl = url;
+      this.showDetail = true;
+      console.log(`this.pokemonUrl : ${this.pokemonUrl}`);
     },
     closeDetail() {
       this.pokemonUrl = "";

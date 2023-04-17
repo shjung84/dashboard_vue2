@@ -14,7 +14,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    color: var(--color-theme-sub);
+    color: $color-theme-sub;
   }
   .c-card--wrap {
     overflow-y: auto;
@@ -36,10 +36,8 @@
       width: calc(50% - 7px);
       min-height: 70px;
       padding: 7px 10px;
-      background: #fff;
-      -webkit-border-radius: 15px;
-      -moz-border-radius: 15px;
-      border-radius: 15px;
+      background: $color-bg;
+      @include border-radius(15px);
       button {
         position: absolute;
         top: 7px;
@@ -60,20 +58,20 @@
             right: 0;
             left: 0;
             height: 5px;
-            background-color: var(--color--opacity-3);
-            border-radius: 5px;
+            background-color: $color-txt-opacity-3;
+            @include border-radius(5px);
           }
           &::after {
             width: 18px;
             height: 13px;
             left: 0;
-            background-color: var(--color-bg-level-3);
+            background-color: $color-bg-level-3;
             transition: all 0.3s;
-            border-radius: 10px;
+            @include border-radius(10px);
           }
           &.is-active::after {
             left: calc(25px - 18px);
-            background-color: var(--color-theme-sub);
+            background-color: $color-theme-sub;
           }
         }
       }
@@ -84,7 +82,7 @@
         }
         dd {
           margin-top: 3px;
-          color: #999;
+          color: $color-txt;
           font-size: 10px;
         }
       }
@@ -95,31 +93,6 @@
       }
     }
   }
-  .scroll--member {
-    position: absolute;
-    top: 30px;
-    left: 0;
-    width: 100%;
-
-    /* display: flex;
-    flex-wrap: nowrap; */
-    /* flex-grow: 1; */
-    height: 100%;
-
-    overflow-y: auto;
-    /* height: 155px; */
-    /* max-height: ; */
-    border: 1px solid #000;
-    .scroll-inner {
-      /* ov
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%; */
-      border: 1px solid #c00;
-    }
-  }
 }
 </style>
 
@@ -127,8 +100,6 @@
 .c-quick__device
   h2 {{ title }}
   router-link(to="/Page3" class="btn-more") #[mdicon(name="dots-horizontal" size="15")]
-  //- vue-scrollbar(class="scroll--member")
-  //-   .scroll-inner
   .c-card--wrap
     .c-card
       .c-card__item(v-for="(item, index) of device")
@@ -144,13 +115,9 @@
 </template>
 
 <script>
-import VueScrollbar from "vue2-scrollbar";
-
 export default {
   name: "QuickDevice",
-  components: {
-    VueScrollbar,
-  },
+  components: {},
   props: {
     title: {
       type: String,

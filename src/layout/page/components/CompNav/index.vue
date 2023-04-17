@@ -14,6 +14,9 @@ nav {
       display: block;
       position: relative;
       z-index: 2;
+      font-weight: 400;
+      font-size: 18px;
+      font-family: "NanumSquare";
     }
     &::before,
     &::after {
@@ -24,10 +27,8 @@ nav {
       z-index: 1;
       width: 40px;
       height: 40px;
-      background-color: var(--color-bg-opacity-5);
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      border-radius: 50%;
+      background-color: $color-bg-opacity-5;
+      @include border-radius(50%);
     }
     &::before {
       left: 50%;
@@ -53,12 +54,8 @@ nav {
       z-index: 2;
       top: 5px;
       width: 100%;
-      /* background-color: #fcc; */
       li {
         position: relative;
-        /* margin-right: -15px; */
-        /* height: 50px; */
-
         &.logout {
           margin-top: auto;
         }
@@ -71,10 +68,12 @@ nav {
           height: 40px;
 
           padding: 10px 10px 10px 15px;
-          color: var(--color--opacity-7);
-          font-size: 1.3em;
-          font-weight: 400;
-
+          color: $color-txt-opacity-7;
+          font: {
+            weight: 400;
+            size: 1.3em;
+            family: "Lato";
+          }
           em {
             vertical-align: middle;
           }
@@ -83,7 +82,7 @@ nav {
           }
           &.router-link-active {
             left: -20px;
-            color: var(--color-bg);
+            color: $color-bg;
             -webkit-transition: left 0.3s, color 0.1s;
             -moz-transition: left 0.3s, color 0.1s;
             -o-transition: left 0.3s, color 0.1s;
@@ -107,10 +106,10 @@ nav {
       left: -35px;
       z-index: 1;
       height: 50px;
-      background-color: var(--color-slidebar);
-      border-radius: 30px;
+      background-color: $color-slidebar;
       transition: top 0.2s ease-out;
-      box-shadow: 0 0 10px var(--color-bg-opacity-5);
+      box-shadow: 0 0 10px $color-bg-opacity-5;
+      @include border-radius(30px);
       &::before {
         content: "";
         position: absolute;
@@ -118,9 +117,9 @@ nav {
         right: -22px;
         width: 15px;
         height: 15px;
-        border-radius: 15px;
-        background-color: var(--color-slidebar);
-        box-shadow: 0 0 10px var(--color-bg-opacity-5);
+        background-color: $color-slidebar;
+        box-shadow: 0 0 10px $color-bg-opacity-5;
+        @include border-radius(15px);
       }
     }
     /* .slide-bar {
@@ -130,9 +129,9 @@ nav {
       left: 0;
       z-index: 1;
       height: 35px;
-      background-color: var(--color-slidebar);
-      border-radius: 30px 0 0 30px;
+      background-color: $color-slidebar;
       transition: top 0.1s ease-out;
+      border-radius: 30px 0 0 30px;
       &::before,
       &::after {
         content: "";
@@ -140,15 +139,15 @@ nav {
         right: 0;
         width: 30px;
         height: 30px;
-        background-color: var(--color-slidebar);
+        background-color: $color-slidebar;
       }
       &::before {
         bottom: 100%;
-        background: radial-gradient(circle at 0 0, transparent 30px, var(--color-slidebar) 30px);
+        background: radial-gradient(circle at 0 0, transparent 30px, $color-slidebar 30px);
       }
       &::after {
         top: 100%;
-        background: radial-gradient(circle at 0 100%, transparent 30px, var(--color-slidebar) 30px);
+        background: radial-gradient(circle at 0 100%, transparent 30px, $color-slidebar 30px);
       }
     } */
   }

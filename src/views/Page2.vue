@@ -7,16 +7,14 @@ h3 {
 .my-task {
   &__list {
     margin-top: 5px;
-    border-top: 1px solid var(--color-border--opacity-1);
-    border: 1px solid #000;
-    @include border-radius(25px);
+    border-top: 1px solid $color-border--opacity-1;
 
     li {
       position: relative;
       padding: 10px;
-      border-bottom: 1px solid var(--color-border--opacity-1);
+      border-bottom: 1px solid $color-border--opacity-1;
       &:hover {
-        background-color: var(--color-theme-opacity-1);
+        background-color: $color-theme-opacity-1;
       }
       label {
         display: block;
@@ -26,14 +24,14 @@ h3 {
         }
         input[type="checkbox"]:checked {
           & + p {
-            color: var(--color--opacity-3);
+            color: $color-txt-opacity-3;
             &:after {
               content: "";
               position: absolute;
               top: 50%;
               left: 0;
               width: 100%;
-              border-top: double var(--color--opacity-1);
+              border-top: double $color-txt-opacity-1;
             }
           }
         }
@@ -43,9 +41,7 @@ h3 {
           i {
             font-weight: 500;
           }
-          strong {
-            margin-left: 10px;
-          }
+          strong,
           span {
             margin-left: 10px;
           }

@@ -3,16 +3,12 @@ main {
   display: flex;
   flex: 1px;
   overflow: hidden;
-  /* overflow-y: auto; */
-
   position: relative;
   width: 100%;
   padding: 15px 10px 15px 20px;
-  background-color: var(--color-bg-level-2);
-  box-shadow: 0 0 10px var(--color--opacity-1);
-  -webkit-border-radius: 25px;
-  -moz-border-radius: 25px;
-  border-radius: 25px;
+  background-color: $color-bg-level-2;
+  box-shadow: 0 0 10px $color-border--opacity-1;
+  @include border-radius(25px);
   &::before,
   &::after {
     content: "";
@@ -24,30 +20,20 @@ main {
   }
   &::before {
     top: 15px;
-    background: linear-gradient(var(--color-bg-level-2), transparent);
+    background: linear-gradient($color-bg-level-2, transparent);
   }
   &::after {
     bottom: 15px;
-    background: linear-gradient(transparent, var(--color-bg-level-2));
+    background: linear-gradient(transparent, $color-bg-level-2);
   }
   .main-inner {
     overflow: auto;
     position: relative;
     z-index: 2;
-    min-width: 400px;
     width: 100%;
     height: 100%;
     padding: 5px 10px 5px 0;
-    /* padding: 15px 20px; */
-    -webkit-border-radius: 25px;
-    -moz-border-radius: 25px;
-    border-radius: 25px;
-  }
-  h2 {
-    margin: 0 0 20px;
-    padding-bottom: 15px;
-    border-bottom: double var(--color--opacity-1);
-    text-align: center;
+    @include border-radius(20px);
   }
 }
 </style>
@@ -56,7 +42,7 @@ main {
   h2 {
     margin: 0 0 20px;
     padding-bottom: 15px;
-    border-bottom: double var(--color--opacity-1);
+    border-bottom: double $color-border--opacity-1;
     text-align: center;
   }
 }
