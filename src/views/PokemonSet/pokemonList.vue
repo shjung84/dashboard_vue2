@@ -102,7 +102,6 @@ export default {
       this.fetchData();
     },
     pokeViewDetail(url) {
-      console.log(`pokeViewDetail : ${url}`);
       this.$emit("pokeViewDetail", url);
     },
   },

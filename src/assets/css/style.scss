@@ -113,16 +113,8 @@ input[type="text"] {
 }
 
 /* button */
-@mixin div {
-  border: 1px solid #000;
-}
 .btn-box {
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  @include div;
-}
-
-.btn-box {
-  @include border-radius(4px);
 }

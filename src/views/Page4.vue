@@ -68,21 +68,22 @@
         padding: 8px;
         border-left: 1px solid $color-border--opacity-1;
         &:first-child {
-          width: 30px;
+          width: 50px;
           border-left: 0;
           text-align: center;
         }
       }
     }
   }
-  #scroll-trigger {
+  #infinite-scroll {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 150px;
-    font-size: 2rem;
-    color: $color-txt-opacity-7;
+    padding-top: 15px;
+    background-color: transparent;
+    color: $color-txt-opacity-5;
+    font-size: 1.5rem;
   }
 }
 
@@ -122,6 +123,9 @@
       background-color: $color-txt;
       border-radius: 50%;
       box-shadow: 0 5px 10px $color-txt-opacity-3, 0 -5px 10px $color-bg-opacity-5;
+      .mdi {
+        color: $color-bg-opacity-5;
+      }
     }
     .data {
       display: flex;
@@ -186,21 +190,21 @@
         }
       }
     }
-    .close {
-      outline: none;
-      border: none;
-      border-radius: 5px;
-      background-color: #333;
-      color: #efefef;
-      padding: 5px 10px;
-      margin-bottom: 20px;
-      cursor: pointer;
+    .btn-box {
+      width: 100%;
+      margin-top: 20px;
+      button {
+        padding: 5px 10px;
+        background-color: $color-border--opacity-5;
+        color: $color-bg;
+        @include border-radius(5px);
+      }
     }
   }
-  .loader {
-    color: $color-bg;
-    font-size: 2rem;
-  }
+}
+.loader {
+  color: $color-bg;
+  font-size: 2rem;
 }
 </style>
 
@@ -209,30 +213,25 @@
   h2 {{ title }}
   div.wrap-inner
     .searchbar
-      form(@submit.prevent="pokeIdSearch")
-        input(type="text" v-model="searchvalue")
-      button(@click="pokeIdSearch()") Search
+      form(@submit="searchPokemon")
+        input(type="text" v-model="searchValue")
+      button(@click="searchPokemon") Search
 
     ul.list
-      li(
-        v-for="(pokemon, index) in pokemons"
-        :key="'poke'+index"
-        @click="pokeViewDetail(pokemon.url)"
+      li(v-for="pokemon in pokemons"
+      @click="showPokemonInfo(pokemon.url)"
       )
         p.box
           span {{ pokemon.id }}
-          span
-            img(
-                :src="imageUrl + pokemon.id + '.png'"
-                :alt="pokemon.name"
-                width="30px"
-              )
           span {{ pokemon.name }}
+      li(id="infinite-scroll" ref="infinitescroll")
+        font-awesome-icon(:icon="['fas', 'spinner']" spin)
 
-  .detail(v-if="showDetail")
+  .detail(v-if="show")
     .detail-view
-      .image(v-if="pokemon")
-        //- img(:src="imageUrl + pokemon.id + '.png'" alt="")
+      .image()
+        img(v-if="pokemon" :src="imageUrl + pokemon.id + '.png'" alt="pokemon.id")
+        mdicon(v-else name="alert-circle" size="30")
       .data(v-if="pokemon")
         h3 {{  pokemon.name }}
         .property
@@ -260,21 +259,18 @@
               v-for="(value, index) in pokemon.types"
               :key="'value'+index"
               ) {{ value.type.name }}
+
       h3(v-else) The pokemon was not found
-      button(class="close" @click="closeDetail") Close
-    //- .loader(v-else)
-    //-   font-awesome-icon(:icon="['fas', 'spinner']" spin)
+      .btn-box
+        button(@click="closeDetail") Close
+
 </template>
 
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-// import PokemonSearch from "./pokemonSearch.vue";
-// import PokemonList from "./pokemonList.vue";
-// import pokemonDetail from "./pokemonDetail.vue";
-
 export default {
-  name: "Members",
+  name: "MyPokemonList",
   props: {
     title: {
       type: String,
@@ -286,33 +282,31 @@ export default {
     return {
       imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
       apiUrl: "https://pokeapi.co/api/v2/pokemon/",
-      pokemonUrl: "",
-      nextUrl: "",
       currentUrl: "",
-      showDetail: false,
+      nextUrl: "",
       pokemons: [],
-      pokemon: {},
-      searchvalue: "",
+      pokemon: "",
+      searchValue: "",
+      show: false,
     };
   },
 
   methods: {
     fetchList() {
-      let request = new Request(this.currentUrl);
-      // console.log(request);
-      fetch(request)
-        .then(response => {
-          if (response.status === 200) {
-            return response.json();
+      let req = new Request(this.currentUrl);
+      fetch(req)
+        .then(res => {
+          if (res.status === 200) {
+            return res.json();
           }
         })
         .then(data => {
-          // this.nextUrl = data.next;
+          this.nextUrl = data.next;
           data.results.forEach(pokemon => {
             pokemon.id = pokemon.url
               .split("/")
-              .filter(function (part) {
-                return !!part;
+              .filter(function (pokemonId) {
+                return pokemonId;
               })
               .pop();
             this.pokemons.push(pokemon);
@@ -322,42 +316,46 @@ export default {
           console.log(error);
         });
     },
-    pokeViewDetail(url) {
-      this.pokemonUrl = url;
-      // console.log(req);
-
-      if (this.pokemonUrl !== "") {
-        console.log(`this.pokemonUrl : ${this.pokemonUrl}`);
-        this.showDetail = true;
-        // this.pokemon = data;
-
-        // this.$emit("pokeIdSearch", this.apiUrl + this.searchvalue);
+    autoScroll() {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.intersectionRatio > 0 && this.nextUrl) {
+            this.next();
+          }
+        });
+      });
+      obs.observe(this.$refs.infinitescroll);
+    },
+    next() {
+      this.currentUrl = this.nextUrl;
+      this.fetchList();
+    },
+    showPokemonInfo(pokemonUrl) {
+      let req = new Request(pokemonUrl);
+      fetch(req)
+        .then(res => {
+          if (res.status === 200) {
+            return res.json();
+          }
+        })
+        .then(data => {
+          this.pokemon = data;
+          this.show = true;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    searchPokemon() {
+      if (this.searchValue === "") {
+        alert(`검색어를 입력하세요.`);
+      } else {
+        this.showPokemonInfo(this.apiUrl + this.searchValue);
       }
-
-      // fetch(req)
-      //   .then(resp => {
-      //     if (resp.status === 200) return resp.json();
-      //   })
-      //   .then(data => {
-      //     this.showDetail = true;
-      //     this.pokemon = data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
     },
     closeDetail() {
-      this.pokemonUrl = "";
-      this.showDetail = false;
-    },
-    pokeIdSearch(url) {
-      this.pokemonUrl = url;
-      // this.showDetail = true;
-      if (this.searchvalue !== "") {
-        console.log(`this.apiUrl : ${this.apiUrl}`);
-        console.log(`this.searchvalue : ${this.searchvalue}`);
-        // this.$emit("pokeIdSearch", this.apiUrl + this.searchvalue);
-      }
+      this.show = false;
+      this.searchValue = "";
     },
   },
   created() {
@@ -365,7 +363,7 @@ export default {
     this.fetchList();
   },
   mounted() {
-    // this.scrollTrigger();
+    this.autoScroll();
   },
 };
 </script>

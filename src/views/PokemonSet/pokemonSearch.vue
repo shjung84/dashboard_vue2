@@ -19,7 +19,6 @@
   &::before {
     top: 100%;
     background: linear-gradient($color-bg-level-2, transparent);
-    /* background: linear-gradient($color-theme-sub, transparent); */
   }
 
   form {
