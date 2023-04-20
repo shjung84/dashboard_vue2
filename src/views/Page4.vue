@@ -46,7 +46,6 @@
     @include border-radius(7px);
   }
 }
-
 .list {
   width: 100%;
   li {
@@ -86,7 +85,6 @@
     font-size: 1.5rem;
   }
 }
-
 .detail {
   display: flex;
   justify-content: center;
@@ -263,7 +261,6 @@
       h3(v-else) The pokemon was not found
       .btn-box
         button(@click="closeDetail") Close
-
 </template>
 
 <script>
@@ -301,7 +298,9 @@ export default {
           }
         })
         .then(data => {
+          console.log(data);
           this.nextUrl = data.next;
+          // console.log(this.nextUrl);
           data.results.forEach(pokemon => {
             pokemon.id = pokemon.url
               .split("/")

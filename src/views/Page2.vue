@@ -1,9 +1,4 @@
 <style lang="scss">
-h3 {
-  text-align: right;
-  font-size: 10px;
-  color: $color-txt;
-}
 .my-task {
   &__list {
     margin-top: 5px;
@@ -76,7 +71,7 @@ h3 {
 .wrap
   h2 {{ title }}
   .my-task
-    h3 [ {{ solvedTask }} / {{ todos.length }} ]
+    p.total {{ solvedTask }} / {{ todos.length }}
     ul.my-task__list
       li(v-for="item in todos" :key="'Todo_'+item.id")
         label
@@ -86,18 +81,16 @@ h3 {
             strong {{ item.date }}
             span {{ item.task }}
           el-button(@click="deleteTodo(item.id)" type="danger" plain circle icon="el-icon-delete" size="mini")
-    form(@submit.prevent="addTodo" class="my-task__form")
-      ul
-        li
-          input(type="text" name="date" v-model="form.date" placeholder="날짜")
-        li
-          input(type="text" name="task" v-model="form.task" placeholder="내용입력")
-      .btn-box
-        button 등록
-        button(@click.prevent="reloadPage") 초기화
-        //- el-button(type="primary") 등록
-        //- el-button(@click.prevent="reloadPage" type="warning") 초기화
-
+    .my-task__form
+      el-form(:model="form" ref="form")
+        el-form-item(prop="date")
+          el-date-picker(type="date" placeholder="Date" v-model="form.date" format="yyyy.MM.dd" value-format="yyyy.MM.dd")
+          //- el-date-picker(type="date" placeholder="Date" v-model="form.date" format="yyyy/MM/dd" value-format="yyyy-MM-dd" :picker-options="pickerOptions" )
+        el-form-item(prop="task")
+          el-input(type="text" v-model="form.task")
+        el-form-item(class="btn-box")
+          el-button(type="primary"  @click="submitForm('form')") 등록
+          el-button(type="warning" plain @click="resetForm('form')") 초기화
 </template>
 
 <script>
@@ -140,37 +133,44 @@ export default {
         },
       ],
       form: {
-        id: "",
-        date: "",
+        date: undefined,
         task: "",
+      },
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() < Date.now();
+        },
       },
     };
   },
   methods: {
-    addTodo() {
-      console.log(`addTodo !!!!!`);
-      if (this.form.task) {
-        this.todos.push({
-          date: this.form.date,
-          id: this.todos.length + 1,
-          task: this.form.task,
-          isDone: false,
-        });
-        this.form.date = "";
-        this.form.task = "";
-      } else {
-        console.log(`None`);
-      }
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          console.log(this.form.date);
+          if (this.form.task) {
+            this.todos.push({
+              date: this.form.date,
+              id: this.todos.length + 1,
+              task: this.form.task,
+              isDone: false,
+            });
+            this.form.date = "";
+            this.form.task = "";
+          }
+        } else {
+          return false;
+        }
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
     },
     deleteTodo(id) {
       console.log(id);
       this.todos = this.todos.filter(t => {
         return t.id !== id;
       });
-    },
-    reloadPage() {
-      console.log(`reload`);
-      window.location.reload();
     },
   },
 };

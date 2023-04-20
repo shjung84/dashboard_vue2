@@ -60,10 +60,14 @@ export default {
   components: {},
   computed: {
     title() {
-      console.log("AppMain :", this.$route.meta.title);
+      // console.log("AppMain :", this.$route.meta.title);
       return this.$route.meta.title;
     },
   },
+  data() {
+    return {};
+  },
+  methods: {},
   mounted() {},
 };
 </script>

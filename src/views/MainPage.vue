@@ -149,7 +149,7 @@
   }
 }
 /*The Wrapper*/
-.scrol--wrap {
+.scroll--wrap {
   height: 370px;
   height: 100%;
 }

@@ -13,9 +13,10 @@ import App from "./App.vue";
 import router from "./router";
 import store from "store";
 import axios from "axios";
-
 import VueScrollbar from "vue2-scrollbar";
+
 import ElementUI from "element-ui";
+import locale from "element-ui/lib/locale/lang/en";
 import VCalendar from "v-calendar";
 
 import mdiVue from "mdi-vue/v2";
@@ -28,6 +29,7 @@ Vue.prototype.$axios = axios;
 
 Vue.use(VueScrollbar);
 Vue.use(ElementUI, {
+  locale,
   size: "small",
   zIndex: 3000,
 });

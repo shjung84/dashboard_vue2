@@ -1,8 +1,8 @@
 <style lang="scss">
 $day-border: 1px solid #b8c2cc;
 $day-border-highlight: 1px solid #b8c2cc;
-$day-width: 90px;
-$day-height: 90px;
+$day-width: 50px;
+$day-height: 50px;
 $weekday-bg: #f8fafc;
 $weekday-border: 1px solid #eaeaea;
 .scrollbar {
@@ -149,7 +149,7 @@ export default {
             title: "Cookout with friends.",
             class: "bg-orange-500 text-white",
           },
-          dates: { months: 5, ordinalWeekdays: { 2: 1 } },
+          dates: { months: 5, ordinalWeekdays: { 2: 3 } },
         },
         {
           key: 7,
