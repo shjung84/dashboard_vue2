@@ -8,171 +8,6 @@
   margin-right: -10px;
   padding-right: 10px;
 }
-
-.c-list--default {
-  width: 100%;
-  .item {
-    &__row {
-      border-bottom: 1px solid $color-border--opacity-1;
-      background-color: $color-bg;
-      text-transform: capitalize;
-      cursor: pointer;
-      &:first-child {
-        border-top: 1px solid $color-border--opacity-1;
-      }
-      &:hover {
-        background-color: $color-theme-opacity-2;
-      }
-      &--inner {
-        display: flex;
-        flex-wrap: nowrap;
-        width: 100%;
-      }
-    }
-    &__cell {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px;
-      border-left: 1px solid $color-border--opacity-1;
-      &--thumb {
-        flex: 0 0 50px;
-        border-left: 0;
-        &img {
-          display: inline-block;
-        }
-      }
-      &--title {
-        flex: 1;
-        justify-content: flex-start;
-        text-align: left;
-      }
-      &--meta {
-        flex: 0 0 80px;
-      }
-    }
-  }
-}
-
-.detail {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 90px 10px 10px;
-  width: 100%;
-  height: 100%;
-  background-color: $color-txt-opacity-7;
-  .detail-view {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    width: 100%;
-    max-width: 510px;
-    padding: 80px 20px 20px;
-    background-color: $color-bg;
-    @include border-radius(15px);
-
-    .image {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      position: absolute;
-      top: -60px;
-      width: 120px;
-      height: 120px;
-      background-color: $color-txt;
-      border-radius: 50%;
-      box-shadow: 0 5px 10px $color-txt-opacity-3, 0 -5px 10px $color-bg-opacity-5;
-      .mdi {
-        color: $color-bg-opacity-5;
-      }
-    }
-    .data {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      width: 100%;
-      h3 {
-        text-transform: capitalize;
-        font: {
-          weight: bold;
-          size: 1.5em;
-        }
-      }
-      .property {
-        width: 100%;
-        max-width: 400px;
-        dl {
-          display: flex;
-          justify-content: space-between;
-          padding: 5px;
-          border-bottom: 1px solid $color-border--opacity-2;
-        }
-      }
-      .types {
-        width: 100%;
-        margin-top: 20px;
-        dl {
-          dt {
-            padding: 3px 5px;
-            border-bottom: 1px solid $color-border--opacity-2;
-            font-size: 1.2em;
-          }
-          dd {
-            display: flex;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-            span {
-              display: inline-block;
-              margin: 5px;
-              padding: 5px 10px 3px;
-              color: $color-bg;
-              text-transform: capitalize;
-              font: {
-                size: 11px;
-                family: "Lato";
-              }
-              word: {
-                wrap: none;
-                break: keep-all;
-              }
-              letter-spacing: 2px;
-              @include border-radius(15px);
-              &.type {
-                background-color: #0a2e50;
-              }
-              &.ability {
-                background-color: #c73015;
-              }
-            }
-          }
-        }
-      }
-    }
-    .btn-box {
-      width: 100%;
-      margin-top: 20px;
-      button {
-        padding: 5px 10px;
-        background-color: $color-border--opacity-5;
-        color: $color-bg;
-        @include border-radius(5px);
-      }
-    }
-  }
-}
-.loader {
-  color: $color-bg;
-  font-size: 2rem;
-}
 </style>
 
 <template lang="pug">
@@ -191,15 +26,63 @@
       li(id="infinite-scroll" ref="infinitescroll")
         p.spinner(v-if="spinner")
           font-awesome-icon(:icon="['fas', 'spinner']" spin)
-  .detail(v-if="show")
+  .c-modalpop__detail(v-if="show")
     .detail-view
-      .image()
-        img(:src="recipes[index].ATT_FILE_NO_MAIN" alt="")
+      .detail-view__img()
+        img(:src="this.rcpDetail.ATT_FILE_NO_MAIN" alt="")
         //- mdicon(v-else name="alert-circle" size="30")
       //-     //- img(v-if="pokemon" :src="imageUrl + pokemon.id + '.png'" alt="pokemon.id")
 
-      .data
-        h3 {{ recipes[index].RCP_NM }}
+      .detail-view__data
+        h3 {{ this.rcpDetail.RCP_NM }}
+        .detail-view__info
+          .detail-view__info--inner
+            ul.detail-view__info--list
+              li
+                strong 조리방법
+                span {{ this.rcpDetail.RCP_WAY2 }}
+              li
+                strong 요리종류
+                span {{ this.rcpDetail.RCP_PAT2 }}
+            ul.detail-view__info--list
+              li
+                strong 열량
+                span {{ this.rcpDetail.INFO_ENG }}
+              li
+                strong 단백질
+                span {{ this.rcpDetail.INFO_PRO }}
+              li
+                strong 지방
+                span {{ this.rcpDetail.INFO_FAT }}
+              li
+                strong 나트륨
+                span {{ this.rcpDetail.INFO_NA }}
+
+          .detail-view__info--inner
+            strong 재료정보
+            ol.detail-view__info--list-02
+              li(v-for="ingredient in rcpIngredients") {{ ingredient }}
+
+
+
+        ul.detail-view__property--list
+        .detail-view__hash(v-if="this.rcpDetail.HASH_TAG")
+          a(href="javascript:;") {{ recipes[index].HASH_TAG }}
+          a(href="javascript:;") {{ recipes[index].HASH_TAG }}
+        .detail-view__types
+          dl
+            dt 저감 조리법 TIP
+            dd {{ recipes[index].RCP_NA_TIP }}
+        .detail-view__types
+          ol
+            li(:v-if="this.rcpDetail.MANUAL01") {{ recipes[index].MANUAL01 }}
+            li(:v-if="this.rcpDetail.MANUAL02") {{ recipes[index].MANUAL02 }}
+            li(:v-if="this.rcpDetail.MANUAL03") {{ recipes[index].MANUAL03 }}
+            li(:v-if="this.rcpDetail.MANUAL04") {{ recipes[index].MANUAL04 }}
+            li(:v-if="this.rcpDetail.MANUAL05") {{ recipes[index].MANUAL05 }}
+            li(:v-if="this.rcpDetail.MANUAL06") {{ recipes[index].MANUAL06 }}
+            li(:v-if="this.rcpDetail.MANUAL07") {{ recipes[index].MANUAL07 }}
+
 
       .btn-box
         button(@click="closeDetail") Close
@@ -237,6 +120,9 @@ export default {
 
       show: false,
       index: "",
+
+      rcpDetail: "",
+      rcpIngredients: [],
     };
   },
   methods: {
@@ -252,7 +138,8 @@ export default {
           data = data.COOKRCP01;
           this.total = data.total_count;
           this.recipes = data.row;
-          console.log(this.recipes);
+          console.log(`length : ${this.recipes.length}`);
+
           this.endIdx = this.endIdx + this.amount;
           this.nextUrl = this.apiUrl + this.endIdx;
           this.spinner = false;
@@ -283,7 +170,9 @@ export default {
     viewDetail(index) {
       this.show = true;
       this.index = index;
-      console.log(index);
+
+      this.rcpDetail = this.recipes[index];
+      this.rcpIngredients = this.recipes[index].RCP_PARTS_DTLS.split("\n");
     },
     closeDetail() {
       this.show = false;
