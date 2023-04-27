@@ -40,9 +40,9 @@
 
 <template lang="pug">
 .searchbar
-  form(@submit.prevent="pokeIdSearch")
+  form(@submit="pokeIdSearch")
     input(type="text" v-model="searchvalue")
-  button(@click="pokeIdSearch()") Search
+  button(@click="pokeIdSearch") Search
 </template>
 
 <script>
@@ -52,7 +52,7 @@ export default {
   name: "PokemonSearch",
   props: ["apiUrl"],
   components: { FontAwesomeIcon },
-  data: () => {
+  data() {
     return {
       searchvalue: "",
     };

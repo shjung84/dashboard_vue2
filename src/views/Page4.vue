@@ -275,7 +275,7 @@ export default {
     },
   },
   components: { FontAwesomeIcon },
-  data: () => {
+  data() {
     return {
       imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
       apiUrl: "https://pokeapi.co/api/v2/pokemon/",
@@ -339,6 +339,7 @@ export default {
         })
         .then(data => {
           this.pokemon = data;
+          console.log(this.pokemon);
           this.show = true;
         })
         .catch(error => {

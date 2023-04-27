@@ -79,12 +79,13 @@ button:focus {
   background-color: $color-theme-opacity-1;
 }
 
-input[type="text"] {
+input[type="text"],
+select {
   display: block;
   width: 100%;
-  height: 30px;
+  height: 40px;
   padding: 0 10px;
-  border: 1px solid $color-txt-opacity-1;
+  border: 1px solid $color-txt-opacity-3;
   @include border-radius(7px);
 }
 
@@ -158,6 +159,55 @@ input[type="text"] {
 .loader {
   color: $color-bg;
   font-size: 2rem;
+}
+
+/* Component */
+.search {
+  border: 1px solid #000;
+  position: sticky;
+  top: -5px;
+  padding-top: 5px;
+  background-color: $color-bg-level-2;
+  width: 100%;
+  margin-bottom: 10px;
+  &::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 3;
+    height: 10px;
+  }
+  &::before {
+    top: 100%;
+    background: linear-gradient($color-bg-level-2, transparent);
+    /* background: linear-gradient($color-theme-sub, transparent); */
+  }
+
+  form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    select {
+      width: 150px;
+    }
+    input {
+    }
+    select + input {
+      margin-left: 10px;
+    }
+    input + button {
+      margin-left: 10px;
+    }
+    button {
+      width: 80px;
+      height: 40px;
+      padding: 10px;
+      border: 1px solid $color-border--opacity-3;
+      background-color: $color-bg;
+      @include border-radius(7px);
+    }
+  }
 }
 
 /* Component List */
@@ -388,6 +438,24 @@ input[type="text"] {
               background-color: #c73015;
             }
           }
+        }
+      }
+    }
+    &__recipe {
+      width: 100%;
+      li {
+        display: flex;
+        width: 100%;
+        padding: 5px 0;
+        border-bottom: 1px solid $color-border--opacity-1;
+        img {
+          width: 100px;
+          margin-right: 10px;
+        }
+        p {
+          display: flex;
+          flex: 1;
+          align-items: center;
         }
       }
     }

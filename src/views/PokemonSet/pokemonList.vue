@@ -54,7 +54,7 @@ export default {
   name: "pokemonList",
   props: ["imageUrl", "apiUrl"],
   components: { FontAwesomeIcon },
-  data: () => {
+  data() {
     return {
       pokemons: [],
       nextUrl: "",

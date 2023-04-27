@@ -13,6 +13,10 @@ import App from "./App.vue";
 import router from "./router";
 import store from "store";
 import axios from "axios";
+
+import VueLodash from "vue-lodash";
+import lodash from "lodash";
+
 import VueScrollbar from "vue2-scrollbar";
 
 import ElementUI from "element-ui";
@@ -26,6 +30,8 @@ Vue.config.productionTip = false;
 
 // Vue.use(axios);
 Vue.prototype.$axios = axios;
+
+Vue.use(VueLodash, { name: "ld", lodash: lodash });
 
 Vue.use(VueScrollbar);
 Vue.use(ElementUI, {

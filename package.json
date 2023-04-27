@@ -25,6 +25,7 @@
     "v-calendar": "^2.4.1",
     "vue": "^2.6.14",
     "vue-loader": "^17.0.1",
+    "vue-lodash": "^2.1.2",
     "vue-router": "^3.6.5",
     "vue2-scrollbar": "^0.0.3",
     "vuex": "^2.5.0"
