@@ -209,7 +209,7 @@
 <template lang="pug">
 .wrap
   h2 {{ title }}
-  div.wrap-inner
+  .wrap-inner
     .searchbar
       form(@submit="searchPokemon")
         input(type="text" v-model="searchValue")

@@ -13,7 +13,7 @@
 <template lang="pug">
 .wrap
   h2 {{ title }}
-  div.wrap-inner
+  .wrap-inner
     //- p.total total {{ this.total }}
     RecipeSearch(
       :searchValue = "searchValue"

@@ -3,7 +3,7 @@
 <template lang="pug">
 .wrap
   h2 {{ title }}
-  div.wrap-inner
+  .wrap-inner
 </template>
 
 <script>

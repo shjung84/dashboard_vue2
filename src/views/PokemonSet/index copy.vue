@@ -1,19 +1,9 @@
-<style lang="scss" scoped>
-.wrap {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  overflow-y: auto;
-  height: 100%;
-  margin-right: -10px;
-  padding-right: 10px;
-}
-</style>
+<style lang="scss" scoped></style>
 
 <template lang="pug">
 .wrap
   h2 {{ title }}
-  div.wrap-inner
+  .wrap-inner
     PokemonSearch(
       :apiUrl="apiUrl"
       @pokeIdSearch="pokeIdSearch"
@@ -22,7 +12,8 @@
       :imageUrl="imageUrl"
       :apiUrl="apiUrl"
       @pokeViewDetail="pokeViewDetail"
-      )
+    )
+
   pokemonDetail(
     v-if="showDetail"
     :pokemonUrl="pokemonUrl"
@@ -32,9 +23,9 @@
 </template>
 
 <script>
-import PokemonSearch from "./pokemonSearch.vue";
-import PokemonList from "./pokemonList.vue";
-import pokemonDetail from "./pokemonDetail.vue";
+import PokemonSearch from "./components/pokemonSearch";
+import PokemonList from "./components/pokemonList";
+import pokemonDetail from "./components/pokemonDetail";
 
 export default {
   name: "Members",

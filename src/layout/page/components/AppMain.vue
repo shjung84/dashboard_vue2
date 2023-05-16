@@ -34,6 +34,15 @@ main {
     height: 100%;
     padding: 5px 10px 5px 0;
     @include border-radius(20px);
+    .wrap {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      overflow-y: auto;
+      height: 100%;
+      margin-right: -10px;
+      padding-right: 10px;
+    }
   }
 }
 </style>

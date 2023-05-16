@@ -51,14 +51,23 @@ var router = new VueRouter({
         },
         {
           path: "Page4",
-          component: () => import("@/views/Page4"),
+          component: () => import("@/views/PokemonSet"),
           meta: {
-            title: "Page4",
+            title: "Pokemon List",
+            depth: "4",
+          },
+        },
+        {
+          path: "Page4/detail/:id",
+          component: () => import("@/views/PokemonSet/detail"),
+          meta: {
+            title: "Pokemon Detail",
             depth: "4",
           },
         },
       ],
     },
+
     {
       path: "/:pathMatch(.*)",
       redirect: "/404",
