@@ -6,11 +6,10 @@ html,
 body {
   height: 100%;
   min-height: 100%;
-  color: var(--color);
-  // color: $color-txt-opacity-3;
+  color: $color-txt;
   font: {
     weight: 300;
-    family: "Noto Sans KR", "", sans-serif;
+    family: "Noto Sans KR", sans-serif;
   }
   @include box-sizing;
 }
@@ -18,7 +17,7 @@ body {
   @include box-sizing;
 }
 body {
-  font-size: 12px;
+  font-size: 14px;
 }
 a {
   text-decoration: none;
@@ -160,11 +159,11 @@ select {
 }
 
 .loader {
-  color: $color-bg;
+  color: $color-txt;
   font-size: 2rem;
 }
 
-/* Component */
+/* */
 .search {
   position: sticky;
   top: -5px;
@@ -220,7 +219,7 @@ select {
   }
 }
 
-/* Component Table */
+/* Table */
 .el-table {
 }
 .el-table th.el-table__cell > .cell {
@@ -228,8 +227,8 @@ select {
   color: $color-border;
 }
 
-/* Component List */
-.c-list--default {
+/* List */
+.list--default {
   width: 100%;
   .item {
     &__row {
@@ -258,7 +257,7 @@ select {
       &--thumb {
         flex: 0 0 50px;
         border-left: 0;
-        &img {
+        img {
           display: inline-block;
         }
       }
@@ -274,7 +273,7 @@ select {
   }
 }
 
-.c-list--gallery {
+.list--gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   grid-gap: 10px;
@@ -319,65 +318,84 @@ select {
   }
 }
 
-/* Component Detail */
-.c-modalpop__detail {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  padding: 90px 10px 10px;
-  width: 100%;
-  height: 100%;
-  background-color: $color-txt-opacity-7;
-  .detail-view {
-    width: 100%;
-    max-width: 510px;
-    padding-top: 80px;
-    background-color: $color-bg;
-    @include border-radius(15px);
-
+/* Detail */
+.detail-view {
+  .basic-info {
+    display: flex;
+    margin-bottom: 20px;
     &__img {
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
-      position: absolute;
-      top: -60px;
-      width: 120px;
-      height: 120px;
-      background-color: $color-txt;
-      border-radius: 50%;
-      box-shadow: 0 5px 10px $color-txt-opacity-3, 0 -5px 10px $color-bg-opacity-5;
-      .mdi {
-        color: $color-bg-opacity-5;
+      width: 150px;
+      height: 150px;
+      border: 1px solid $color-border--opacity-1;
+      // @include border-radius(10px);
+      img {
+        width: 120px;
+        height: 120px;
+      }
+    }
+    &__box {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-left: 20px;
+      h3 {
+        font: {
+          weight: 600;
+          size: 1.7em;
+          family: "NanumSquare";
+        }
+      }
+    }
+  }
+  .basic-list {
+    font: {
+      size: 15px;
+      family: "NanumSquare";
+    }
+    dl {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      padding: 2px;
+      border-bottom: 1px solid $color-border--opacity-1;
+      dt {
+        width: 150px;
+      }
+      dd {
+        flex: 1;
       }
     }
   }
 }
-.detail-view {
+
+.pop-detail {
   border: 1px solid #000;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   position: relative;
-  padding: 20px;
-
+  width: 100%;
+  max-width: 510px;
+  padding: 80px 20px 20px;
+  background-color: $color-bg;
+  @include border-radius(15px);
   &__img {
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-
+    position: absolute;
+    top: -60px;
     width: 120px;
     height: 120px;
     background-color: $color-txt;
-    border-radius: 50%;
     box-shadow: 0 5px 10px $color-txt-opacity-3, 0 -5px 10px $color-bg-opacity-5;
+    @include border-radius(50%);
     .mdi {
       color: $color-bg-opacity-5;
     }
@@ -390,7 +408,7 @@ select {
       align: center;
     }
     font: {
-      weight: bold;
+      weight: 600;
       size: 1.5em;
       family: "NanumSquare";
     }
@@ -455,7 +473,7 @@ select {
       li {
         position: relative;
         padding-left: 10px;
-        font-size: 11px;
+
         &:before {
           content: "-";
           position: absolute;
@@ -483,6 +501,7 @@ select {
     display: flex;
     justify-content: flex-start;
     width: 100%;
+    margin-top: 5px;
     a {
       margin: 2px;
       padding: 0 7px;
@@ -561,45 +580,47 @@ select {
   }
 }
 
-/* Other List */
-.poke-type__detail {
-  border: 1px solid #000;
-  width: 100%;
-
-  dl {
-    // padding: 5px;
-    dt {
+.poke-type {
+  span {
+    display: inline-block;
+    margin: 3px;
+    padding: 2px 7px 3px;
+    // color: #fff;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    @include border-radius(20px);
+    font: {
+      size: 12px;
+      weight: 400;
+      family: "Lato";
     }
-    dd {
-      span {
-        display: inline-block;
-        margin: 3px;
-        padding: 2px 7px 3px;
-        color: #fff;
-        letter-spacing: 1px;
-        text-transform: capitalize;
-        @include border-radius(20px);
-        font: {
-          size: 11px;
-          weight: 400;
-          family: "Lato";
-        }
-        word: {
-          wrap: none;
-          break: keep-all;
-        }
-      }
-      &.type span {
-        background-color: #a7c8d2;
-      }
-      &.ability span {
-        background-color: #d6adc5;
-      }
-    }
-    & + dl {
-      margin-top: 5px;
-      padding-top: 5px;
-      border-top: 1px solid $color-border--opacity-2;
+    word: {
+      wrap: none;
+      break: keep-all;
     }
   }
+  .type span {
+    // background-color: #a7c8d2;
+    background-color: rgba(167, 200, 210, 0.3);
+  }
+  .ability span {
+    // background-color: #d6adc5;
+    background-color: rgba(214, 173, 197, 0.3);
+  }
+}
+
+/* Modal */
+.c-modal__detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  padding: 90px 10px 10px;
+  width: 100%;
+  height: 100%;
+  background-color: $color-txt-opacity-7;
 }

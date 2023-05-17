@@ -1,26 +1,26 @@
 <style lang="scss" scoped></style>
 
 <template lang="pug">
-//- .c-modalpop__detail()
-.c-modalpop__detail(v-if="show")
-  .detail-view
-    .detail-view__img()
+//- .c-modal__detail()
+.c-modal__detail(v-if="show")
+  .pop-detail
+    .pop-detail__img()
       img(:src="this.rcpDetail.ATT_FILE_NO_MAIN" alt="")
       //- mdicon(v-else name="alert-circle" size="30")
 
-    h3.detail-view__subject {{ this.rcpDetail.RCP_NM }}
+    h3.pop-detail__subject {{ this.rcpDetail.RCP_NM }}
 
-    .detail-view__data
-      .detail-view__info
-        .detail-view__info--inner
-          ul.detail-view__info--list
+    .pop-detail__data
+      .pop-detail__info
+        .pop-detail__info--inner
+          ul.pop-detail__info--list
             li
               strong 조리방법
               span {{ this.rcpDetail.RCP_WAY2 }}
             li
               strong 요리종류
               span {{ this.rcpDetail.RCP_PAT2 }}
-          ul.detail-view__info--list
+          ul.pop-detail__info--list
             li
               strong 열량
               span {{ this.rcpDetail.INFO_ENG }}
@@ -34,22 +34,22 @@
               strong 나트륨
               span {{ this.rcpDetail.INFO_NA }}
 
-        .detail-view__info--inner
+        .pop-detail__info--inner
           strong 재료정보
-          ul.detail-view__info--list-02
+          ul.pop-detail__info--list-02
             li(v-for="ingredient in rcpIngredients") {{ ingredient }}
-      .detail-view__hash(v-if="this.rcpDetail.HASH_TAG")
+      .pop-detail__hash(v-if="this.rcpDetail.HASH_TAG")
         a(href="javascript:;") {{ this.rcpDetail.HASH_TAG }}
         a(href="javascript:;") {{ this.rcpDetail.HASH_TAG }}
-      .detail-view__types
+      .pop-detail__types
         dl
           dt 저감 조리법 TIP
           dd {{ this.rcpDetail.RCP_NA_TIP }}
-      .detail-view__types.sticky
+      .pop-detail__types.sticky
         dl
           dt 요리 순서
           dd
-            ol.detail-view__recipe
+            ol.pop-detail__recipe
               li(v-if="this.rcpDetail.MANUAL01 || this.rcpDetail.MANUAL_IMG01")
                 img(:src="this.rcpDetail.MANUAL_IMG01")
                 p {{ this.rcpDetail.MANUAL01 }}

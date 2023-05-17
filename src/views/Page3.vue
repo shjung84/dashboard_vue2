@@ -1,14 +1,4 @@
-<style lang="scss" scoped>
-.wrap {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  overflow-y: auto;
-  height: 100%;
-  margin-right: -10px;
-  padding-right: 10px;
-}
-</style>
+<style lang="scss" scoped></style>
 
 <template lang="pug">
 .wrap

@@ -4,43 +4,47 @@
 .wrap
   h2 {{ title }}
   .wrap-inner
-    p detail
-    .detail-view
-      .detail-view__img
-        img(:src="imageUrl + pokemon.id + '.png'" alt="")
-      h3.detail-view__subject {{ pokemon.name }}
-      .detail-view__data
-        .detail-view__info--inner
-          ul.detail-view__info--list
-            li
-              strong Base Experience
-              span {{ pokemon.base_experience }} XP
-            li
-              strong Height
-              span {{ pokemon.height / 10 }} m
-            li
-              strong Weight
-              span {{ pokemon.weight / 10 }} kg
-        .detail-view__info--inner
-          .poke-type__detail
+    .detail-view()
+      .basic-info
+        //- .basic-info__img(v-loading="loading")
+        .basic-info__img()
+          img(v-if="imgUrl" :src="imgUrl" alt="")
+          .loader(v-else)
+            font-awesome-icon(:icon="['fas', 'spinner']" spin)
+          //- mdicon( name="alert-circle" size="30")
+          //- mdicon(v-else name="alert-circle" size="30")
+        .basic-info__box
+          h3 {{ pokemon.name }}
+          .basic-list
             dl
-              dt Pokemon Types
-              dd.type
-                span(
-                v-for="(value, index) in pokemon.types"
-                :key="'value'+index"
-                ) {{ value.type.name }}
+              dt Base Experience
+              dd {{ pokemon.base_experience }} XP
             dl
-              dt Abilities
-              dd.ability
-                span(
-                v-for="(value, index) in pokemon.types"
-                :key="'value'+index"
-                ) {{ value.type.name }}
-
+              dt Height
+              dd {{ pokemon.height / 10 }} m
+            dl
+              dt Weight
+              dd {{ pokemon.weight / 10 }} kg
+      .basic-list.poke-type
+        dl
+          dt Pokemon Types
+          dd.type
+            span(
+            v-for="(value, index) in pokemon.types"
+            :key="'value'+index"
+            ) {{ value.type.name }}
+        dl
+          dt Abilities
+          dd.ability
+            span(
+            v-for="(value, index) in pokemon.abilities"
+            :key="'value'+index"
+            ) {{ value.ability.name }}
 </template>
 
 <script>
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
 export default {
   name: "pokemonDetail",
   props: {
@@ -49,29 +53,29 @@ export default {
       default: "",
     },
   },
-  components: {},
+  components: { FontAwesomeIcon },
   data() {
     return {
       imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
       apiUrl: "https://pokeapi.co/api/v2/pokemon/",
       pokemon: {},
+      imgUrl: "",
+      loading: true,
     };
   },
-  mounted() {
-    // console.log(this.$route.params.id);
-    // this.pokemon.id = this.$route.params.id;
-  },
+  mounted() {},
   methods: {
     fetchData() {
+      this.loading = true;
       let req = new Request(this.pokemonUrl);
       fetch(req)
         .then(res => {
           if (res.status === 200) return res.json();
         })
         .then(data => {
-          console.log(data);
           this.pokemon = data;
-          this.show = true;
+          this.imgUrl = this.imageUrl + data.id + ".png";
+          this.loading = false;
         })
         .catch(error => {
           console.log(error);
@@ -79,10 +83,7 @@ export default {
     },
   },
   created() {
-    console.log(`::::::::::::::::::::: created :::::::::::::::::::::`);
-    console.log(this.$route.params.id);
     this.pokemonUrl = this.apiUrl + this.$route.params.id;
-    console.log(this.pokemonUrl);
     this.fetchData();
   },
 };

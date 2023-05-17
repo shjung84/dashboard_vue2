@@ -1,7 +1,7 @@
 <style lang="scss" scoped></style>
 
 <template lang="pug">
-ul.c-list--default
+ul.list--default
   //- li 받은 검색어 :: {{ mValue }}
   li 받은 검색어 :: #[input(type="text" :value="mValue")]
   li.item__row(v-for="(dish, index) in dishes")
